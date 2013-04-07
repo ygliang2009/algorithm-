@@ -29,8 +29,8 @@ class Queue
 		Queue():size(0){this->head = this->tail = NULL;}
 		/* 析构函数 */
 		virtual ~Queue();
-		Node<T>& getHead(){return this->head;}
-		Node<T>& getTail(){return this->tail;}
+		const T& getHead(){return this->head->val;}
+		const T& getTail(){return this->tail->val;}
 		int length(){return this->size;}
 		void enqueue(const T &t_obj);
    		const T& dequeue();

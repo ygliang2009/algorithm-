@@ -13,6 +13,8 @@ int main()
 	queue.enqueue(s);
 	queue.enqueue(s2);
 	queue.enqueue(s3);
+	cout << queue.getHead() << endl;
+	cout << queue.getTail() << endl;
 	while(queue.length() > 0)
 		cout << queue.dequeue() << endl;; 
 	return 0;
