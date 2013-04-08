@@ -1,0 +1,4 @@
+两个问题，分别在queue和sort目录中
+1. Queue.h中，69行
+2. Sorter.h中，82行，打开注释，即报段错误 
+3. Heap.h中 delete[] 一个堆地址，又出core 

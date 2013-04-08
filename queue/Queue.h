@@ -49,8 +49,6 @@ template <class T>
 void Queue<T>::enqueue(const T &t_obj)
 {
 	Node<T> *node = new Node<T>(t_obj);
-	/* 这里报了个bug，类的const成员只能在构造函数中赋值 */
-	//node->val = t_obj;
 	if(this->size == 0)
 	{
 		this->head = this->tail = node; 
@@ -67,6 +65,7 @@ const T& Queue<T>::dequeue()
 {
 	if(this->size == 0)
 	{
+		/* 编译时warning,返回一个临时变量 */
 		return NULL;
 	}
 	else if(--this->size == 0)
