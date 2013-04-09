@@ -40,7 +40,7 @@ bool Bucket::add_node(int val){
 	int idx = val/100;
 	IntPointer *idx_head = this->head_ptr + idx;
 	IntPointer* ip = find_node(idx_head,val);
-	if(ip->val == val)		
+	if(ip->next&&ip->next->val == val)		
 		return false;
 	/* 头结点中的第一个元素 */
 	if(idx_head == ip)
@@ -53,11 +53,35 @@ bool Bucket::add_node(int val){
 	return true;	
 }
 
+bool Bucket::delete_node(int val){
+	int idx = val/100;
+	IntPointer *idx_head = head_ptr + idx;
+	if(idx_head->val == -1)
+		return false;
+	IntPointer *p = idx_head->next;
+	IntPointer *q = idx_head;
+	while(p->val){
+		if(p->val == val){
+			this->size--;
+			q->next = p->next;
+			delete(p);
+			/* 仅有的一个元素被删除 */
+			if(q->next == NULL && q == idx_head){
+				q->val = -1;
+			}
+			return true;			
+		}	
+		q = p;
+		p = p->next;
+	}
+	return false;
+}
+
 int* Bucket::bucket_sort(int *p,int length){
 	for(int i = 0; i < length; i++){
 		bool res = add_node(*(p + i));
 		if(res == false)
-			cerr << "add_node error for node value" << *(p + i) << endl;
+			cerr << "add_node error for node value " << *(p + i) << endl;
 	}	
 	int *res = collect_node();	
 	return res;
@@ -84,6 +108,8 @@ int main(){
 	int primary_array[] = {232,43,231,542,19,845,185,68,97};
 	int length = 9;
 	int* res_array = bucket.bucket_sort(primary_array,length);
-	copy(res_array,res_array + length,ostream_iterator<int>(cout,"\n"));
+	bucket.delete_node(231);
+	int* res_array2 = bucket.bucket_sort(primary_array,bucket.length());
+	copy(res_array2,res_array2 + length,ostream_iterator<int>(cout,"\n"));
 	return 0;
 }

@@ -24,13 +24,13 @@ class IntPointer{
 class Bucket{
 	int size;
 	IntPointer *head_ptr;
-	bool add_node(int val);
-	IntPointer* find_node(IntPointer *,int);
-	bool delete_node(int val);
 	public:
 		Bucket();
 		int length(){return size;}
 		virtual ~Bucket();
+		bool add_node(int val);
+		bool delete_node(int val);
+		IntPointer* find_node(IntPointer *,int);
 		int* collect_node();
 		int* bucket_sort(int *,int length);
 };
