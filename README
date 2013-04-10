@@ -2,3 +2,4 @@
 1. Queue.h中，69行
 2. Sorter.h中，82行，打开注释，即报段错误 
 3. Heap.h中 delete[] 一个堆地址，又出core 
+4. BinaryTree.h 中第135行delete不管用，如果把130行和132行注释掉，仍然能打印出p的值
