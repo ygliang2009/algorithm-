@@ -7,6 +7,10 @@ class serial_node{
 	public:
 		char a;
 		int b;
+		int s_len;
+		char *s;
+		serial_node():a(0),b(0),s_len(0),s(NULL){}
+		virtual ~serial_node();
 };
 
 class serial_class{
