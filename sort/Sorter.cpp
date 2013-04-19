@@ -33,8 +33,11 @@ vector<int>* Sorter::insert_sort(){
 
 vector<int>* Sorter::merge(vector<int> *vec){
 	int vec_size = vec->size();
-	if(vec_size == 1)
-		return vec;
+	if(vec_size == 1){
+		vector<int> *vec_small = new vector<int>();
+		copy(vec->begin(),vec->end(),back_inserter(*vec_small));
+		return vec_small;
+	}
 	vector<int> sub_vec_left;
 	vector<int> sub_vec_right;
 	copy(vec->begin(),vec->begin() + vec_size/2,back_inserter(sub_vec_left));
@@ -56,8 +59,8 @@ vector<int>* Sorter::merge(vector<int> *vec){
 		for(;i < res_vec_left->size();i++)
 			res_vec->push_back(res_vec_left->at(i));	
 	/* 这里为啥会报错 */
-	//delete res_vec_left;
-	//delete res_vec_right;
+	delete res_vec_left;
+	delete res_vec_right;
 	return res_vec;
 }
 
@@ -112,7 +115,7 @@ int main()
 	vec.push_back(28);
 	vec.push_back(19);
 	Sorter sort_obj(vec);
-	vector<int> *res_vec = sort_obj.quick_sort();
+	vector<int> *res_vec = sort_obj.merge_sort();
 	cout << res_vec->size() << endl;
 	for(int i = 0; i < res_vec->size(); i++)
 		cout << res_vec->at(i) << endl;

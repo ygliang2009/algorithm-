@@ -134,6 +134,5 @@ int main(){
 	heap.heap_sort();
 	int *res_data = heap.get_data();
 	copy(res_data,res_data + heap.length(),ostream_iterator<int>(cout,"\n"));
-//	delete[] res_data;
 	return 0;
 }
